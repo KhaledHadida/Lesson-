@@ -289,7 +289,7 @@ public class ICS3UIClass extends JComponent {
         ball.y = HEIGHT/2;
     }
     
-    public void ballMove()
+    
     
     
    
