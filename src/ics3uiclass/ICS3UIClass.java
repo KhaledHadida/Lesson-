@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.util.Random;
 
 /**
  *
@@ -28,12 +29,15 @@ public class ICS3UIClass extends JComponent {
     boolean wPressed;
     boolean sPressed;
     
+     Random number = new Random();
+    
     boolean pause = false;
     
     int player1Score = 0;
     int player2Score = 0;
     
-    int velocity = 4;
+    int velocityX = 4;
+    int velocityY = 4;
     
     
     
@@ -137,6 +141,7 @@ public class ICS3UIClass extends JComponent {
             // GAME LOGIC STARTS HERE 
             
             if(!pause){
+                collision();
             if(upPressed){
                
                 player1.y = player1.y - 5;
@@ -154,12 +159,15 @@ public class ICS3UIClass extends JComponent {
             }
            
             
-            if(ball.intersects(ball)){
-                
-            }
+     
             
             
-            ball.x += 3;
+            ball.x += velocityX;
+            ball.y += velocityY;
+            
+            
+            
+          
             
             
             
@@ -287,6 +295,42 @@ public class ICS3UIClass extends JComponent {
     public void resetBall(){
         ball.x = WIDTH/2;
         ball.y = HEIGHT/2;
+    }
+    
+    public void collision(){
+        if(ball.intersects(player1)){
+            
+           int rand = number.nextInt(5) + 1;
+            
+            velocityX = rand;
+            velocityY = 4;
+           
+          
+//            System.out.println(ball.x);
+        }
+        
+        if(ball.intersects(player2)){
+            int rand = number.nextInt(5) + 1;
+            
+            
+            
+              velocityX = rand*-1;
+               velocityY = -4;
+            
+//              System.out.println(ball.x);
+        }
+        
+          if(ball.y <= 0){
+              velocityY = 3;
+            }
+        
+          if(ball.y >= HEIGHT){
+              velocityY = -3;
+          }
+        
+        
+        
+        
     }
     
     
